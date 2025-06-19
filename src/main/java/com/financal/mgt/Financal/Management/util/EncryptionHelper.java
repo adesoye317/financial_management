@@ -32,7 +32,7 @@ public class EncryptionHelper {
      * @param a the input arguments
      */
     public static void main(String[] a) {
-		System.out.println(encrypt("Anuoluwa1@"));
+		System.out.println(encrypt("Anuoluwa1%40"));
 	}
 
     /**

@@ -6,6 +6,8 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +15,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Configuration
-@Slf4j
 public class SpringMongoConfig {
+	private static final Logger log = LoggerFactory.getLogger(SpringMongoConfig.class);
+
 
 	@Value("${spring.data.mongodb.database}")
 	private String databaseName;
@@ -44,7 +47,7 @@ public class SpringMongoConfig {
 					decryptedUsername, decryptedPassword, clusterUrl
 			);
 
-			log.info("MongoDB SRV connection URI: {}", srvUri);
+//			log.info("MongoDB SRV connection URI: {}", srvUri);
 
 			// Create the MongoClient
 			ConnectionString connectionString = new ConnectionString(srvUri);
