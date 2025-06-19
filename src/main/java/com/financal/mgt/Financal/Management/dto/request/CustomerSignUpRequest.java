@@ -1,4 +1,4 @@
-package com.financal.mgt.Financal.Management.dto;
+package com.financal.mgt.Financal.Management.dto.request;
 
 
 import jakarta.validation.constraints.Email;
@@ -14,6 +14,7 @@ public class CustomerSignUpRequest {
 
     @NotBlank
     private String password;
+    private String deviceToken;
 
 
     public String getPhoneNumber() {
@@ -40,12 +41,21 @@ public class CustomerSignUpRequest {
         this.password = password;
     }
 
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
+
     @Override
     public String toString() {
         return "CustomerSignUpRequest{" +
                 "phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", deviceToken='" + deviceToken + '\'' +
                 '}';
     }
 }
