@@ -10,9 +10,10 @@ public class Customer {
 
     @Id
     private String id;
+    @Indexed(unique = true)
     private String userId;
 
-    @Indexed(unique = true)
+
     private String phoneNumber;
 
     @Indexed(unique = true)

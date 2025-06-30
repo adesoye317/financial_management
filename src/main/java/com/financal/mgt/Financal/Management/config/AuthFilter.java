@@ -43,7 +43,7 @@ public class AuthFilter extends GenericFilterBean {
         String requestMethod = request.getMethod();
         System.out.println("Request URI: " + requestURI + ", Method: " + requestMethod);
 
-        String[] excludedPaths = {"/xpenseny/api/customers/signup", "xpenseny/actuator"}; // Add more paths as needed;
+        String[] excludedPaths = {"/xpenseny/api/customers/signup", "xpenseny/actuator", "/xpenseny/api/customers/send", "/xpenseny/api/customers/verify"}; // Add more paths as needed;
 
         for (String path : excludedPaths) {
             if (requestURI.equals(path) || requestURI.matches(path)) {

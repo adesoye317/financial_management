@@ -1,5 +1,6 @@
 package com.financal.mgt.Financal.Management.service.impl;
 
+import com.financal.mgt.Financal.Management.dto.request.CustomerLoginRequest;
 import com.financal.mgt.Financal.Management.dto.request.CustomerSignUpRequest;
 import com.financal.mgt.Financal.Management.dto.response.FinalResponse;
 import com.financal.mgt.Financal.Management.model.Customer;
@@ -8,10 +9,10 @@ import com.financal.mgt.Financal.Management.service.CustomerService;
 import com.financal.mgt.Financal.Management.util.Hash;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -55,6 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setPhoneNumber(request.getPhoneNumber());
             customer.setPasswordHash(Hash.hash(request.getPassword()));
             customer.setUserId(UUID.randomUUID().toString());
+            customer.setDeviceToken(request.getDeviceToken());
 
             customerRepository.save(customer);
 
@@ -71,6 +74,50 @@ public class CustomerServiceImpl implements CustomerService {
             return ResponseEntity.badRequest().body(response);
         }
     }
+
+    @Override
+    public Object login(CustomerLoginRequest request) {
+        FinalResponse response = new FinalResponse();
+        try {
+            // Attempt to find user by email or phone number
+            Optional<Customer> optionalCustomer = customerRepository
+                    .findByEmail(request.getUsername());
+
+            if (optionalCustomer.isEmpty()) {
+                response.setMessage("Invalid email/phone number or password");
+                response.setStatusCode(400);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+
+            Customer customer = optionalCustomer.get();
+            String password = Hash.hash(request.getPassword());
+
+            // Validate password
+            if (password.equals(customer.getPasswordHash())) {
+                response.setMessage("Invalid email/phone number or password");
+                response.setStatusCode(400);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+
+            // Optionally update device token
+            customer.setDeviceToken(request.getDeviceToken());
+            customerRepository.save(customer);
+
+            // Build success response
+            response.setMessage("Login successful");
+            response.setStatusCode(200);
+            response.setToken(generateJWTToken(customer, request.getDeviceToken()));
+            response.setData(customer);
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            log.error("Error occurred during login", e);
+            response.setMessage("Unable to log you in at the moment. Try again");
+            response.setStatusCode(400);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
 
     private String generateJWTToken(Customer user, String deviceToken) {
         try {
