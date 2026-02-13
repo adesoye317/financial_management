@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>{{APP_NAME}} — Verify your email</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+        .wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #e8f4fc 0%, #f0f7ff 100%);
+            padding: 40px 24px;
+            text-align: center;
+            border-radius: 12px 12px 0 0;
+        }
+        .header-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 0;
+        }
+        .content {
+            background: #ffffff;
+            padding: 40px 32px;
+            border: 1px solid #e5e7eb;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+        }
+        .greeting {
+            font-size: 16px;
+            margin: 0 0 20px;
+            color: #1a1a1a;
+        }
+        .message {
+            font-size: 16px;
+            margin: 0 0 32px;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+        .otp-container {
+            background: #f8fafb;
+            border-radius: 8px;
+            padding: 28px 24px;
+            text-align: center;
+            margin: 0 0 28px;
+        }
+        .otp-label {
+            font-size: 15px;
+            color: #4a5568;
+            margin: 0 0 16px;
+        }
+        .otp-code {
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: 12px;
+            color: #f97316;
+            margin: 0;
+            padding-left: 12px;
+        }
+        .expiry-notice {
+            font-size: 15px;
+            color: #1a1a1a;
+            margin: 0 0 40px;
+            line-height: 1.5;
+        }
+        .expiry-notice strong {
+            font-weight: 700;
+        }
+        .signature {
+            font-size: 15px;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.6;
+        }
+        @media (max-width: 480px) {
+            .wrapper {
+                padding: 12px;
+            }
+            .header {
+                padding: 32px 20px;
+            }
+            .header-title {
+                font-size: 26px;
+            }
+            .content {
+                padding: 32px 24px;
+            }
+            .otp-code {
+                font-size: 32px;
+                letter-spacing: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper" role="article" aria-label="Xpenskey verification code">
+
+    <div class="header">
+        <h1 class="header-title">Verify your email</h1>
+    </div>
+
+    <div class="content">
+        <p class="greeting">Hey {{username}},</p>
+
+        <p class="message">
+            Welcome to Xpenskey. Please verify your email address to complete your registration.
+        </p>
+
+        <div class="otp-container">
+            <p class="otp-label">Your verification code</p>
+            <p class="otp-code" role="text" aria-label="One time password">{{OTP}}</p>
+        </div>
+
+        <p class="expiry-notice">
+            This code will expire in <strong>10 minutes</strong>, so be sure to use it soon.
+        </p>
+
+        <p class="signature">
+            See you there,<br/>
+            The Xpenskey team
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

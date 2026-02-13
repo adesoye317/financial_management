@@ -1,0 +1,66 @@
+
+secret:
+  key: tIPvEW6eWvHbkbj6nfUQACcol1zR9pD+zrvgveUlJCU=
+server:
+  port: 8090
+  servlet:
+    context-path: /xpenskey
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/xpenskey
+    username: ov2RtVtUVNm5P76HPmudDt5FCvNfUe1CKkVr0/8Izzw8nGWC
+    password: qE0OCRAbJ3gZsTKhBxWJWU1iPsbFX89zSlYBfokoUto00+NXZdv12w==
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      poolName: XPENSKEY
+      maximumPoolSize: 5
+      minimumIdle: 5
+      idleTimeout: 30000
+      connectionTimeout: 30000
+      maxLifeTime: 1800000
+      maxLifetime: 1800000
+      connectionInitSql: SELECT 1 FROM DUAL
+      validationTimeOut: 30000
+      leakDetectionThreshold: 2000
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update   # use validate in prod
+      show-sql: false
+      format_sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: support@xpenskey.com
+    password: OJQyCdP7Vt9ZgNt+0l8cIbALPwBak4dFYlA2s/+mVo5SaPblQiG5HnFLP8qcD64=
+    properties:
+      mail:
+        debug: false
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+logging:
+  level:
+    com.sun.mail: OFF
+    javax.mail: OFF
+    org.springframework.mail: OFF
+    jakarta.mail: OFF
+    org.eclipse.angus.mail: OFF
+    org.eclipse.angus.mail.smtp: OFF
+
+
+
