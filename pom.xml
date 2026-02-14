@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.financal.mgt</groupId>
-	<artifactId>Financal-Management</artifactId>
+	<artifactId>xpenskey-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Financal-Management</name>
+	<name>xpenskey-backend</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
